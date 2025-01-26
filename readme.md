@@ -100,46 +100,67 @@ pipeline {
 pipeline {
     environment {
         registry = "jmoroko/tp4cicd"
-        registryCredential = 'dockerhub'
+        registryCredential = 'dockerhub' // ID des credentials Docker Hub dans Jenkins
         dockerImage = ''
-        DOCKER_HOST = 'npipe:////./pipe/docker_engine'
+        DOCKER_HOST = 'npipe:////./pipe/docker_engine' // Pour Windows
     }
     agent any
     stages {
         stage('Cloning Git') {
             steps {
-                git branch: 'main', 
-                    credentialsId: 'jmoroko', 
+                git branch: 'main',
+                    credentialsId: 'jmoroko',
                     url: 'https://github.com/JMOROKO/web-app-tp4-docker.git'
             }
         }
-        stage('Building image') {
+        stage('Building Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    echo "Building Docker image..."
+                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
                 }
             }
         }
-        stage('Test image'){
-            steps{
-                script{
+        stage('Testing Docker Image') {
+            steps {
+                script {
+                    echo "Running tests on Docker image..."
+                    // Remplacez par des tests réels si nécessaire
                     echo "Tests passed"
                 }
             }
         }
-        stage('Publish Image') {
+        stage('Publishing Docker Image') {
             steps {
                 script {
+                    echo "Publishing Docker image to Docker Hub..."
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
-                        dockerImage.push()
+                        dockerImage.push() // Push avec le numéro de build
+                        dockerImage.push('latest') // Push avec le tag 'latest'
                     }
+                }
+            }
+        }
+        stage('Deploying Docker Image') {
+            steps {
+                script {
+                    echo "Deploying Docker image..."
+                    // Commande pour lancer le conteneur Docker sur Windows
+                    bat "docker run -d -p 8080:80 --name app-${BUILD_NUMBER} ${registry}:${BUILD_NUMBER}"
                 }
             }
         }
     }
 }
+
 </pre>
 <h1>11. Créer un job 3 et coupler le script Jenkinsfile au job 3</h1>
 <img src="assets/19-script-path.png" alt=""> <br>
 <img src="assets/20-config-jenkins-etape1.png" alt=""> <br>
 <img src="assets/20-config-jenkins-etape2.png" alt=""> <br>
+<h1>12. Resultat de la mise en place du pipeline</h1>
+<img src="assets/22-mise-en-place-pipeline.png" alt="">
+<h2>13. Resultat du déploiement dans docker desktop</h2>
+<img src="assets/22-mise-en-place-docker.png" alt=""> 
+<h2>14. Affichage de l'application déployé sur mon navigateur</h2>
+<img src="assets/23-app.png" alt="">
