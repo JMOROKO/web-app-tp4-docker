@@ -4,6 +4,7 @@ pipeline {
         registryCredential = 'dockerhub' // ID des credentials Docker Hub dans Jenkins
         dockerImage = ''
         DOCKER_HOST = 'npipe:////./pipe/docker_engine' // Pour Windows
+        //DOCKER_HOST = 'tcp://10.0.5.1:2375' // Connexion au serveur Docker distant
     }
     agent any
     stages {
