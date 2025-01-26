@@ -52,4 +52,87 @@ Il faut utiliser le même compte que vous compter utiliser dans docker hub
 <p><b>Lancement automatique du job</b></p>
 <img src="assets/16-lancement-auto-job.png" alt=""> <br>
 <img src="assets/17-docker-image.png" alt=""> <br>
-
+<h1>10. Créer un job 2 de type pipeline</h1>
+<img src="assets/18-job2pipeline.png" alt=""> 
+<p><b>Configuration</b></p>
+<img src="assets/18-config-job2.png" alt="">
+<pre>
+pipeline {
+    environment {
+        registry = "jmoroko/tp4cicd"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git 'https://github.com/JMOROKO/web-app-tp4-docker'
+            }
+        }
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Publish Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+    }
+}
+</pre>
+<h1>10. Créer un job 3 de type pipeline</h1>
+<img src="assets/18-job3pipeline.png" alt="">
+<p><b>Configuration contenu du fichier : Jenkinsfile </b></p>
+<pre>
+pipeline {
+    environment {
+        registry = "jmoroko/tp4cicd"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git 'https://github.com/JMOROKO/web-app-tp4-docker'
+            }
+        }
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Test image'){
+            steps{
+                script{
+                    echo "Tests passed"
+                }
+            }
+        }
+        stage('Publish Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+    }
+}
+</pre>
+<h1>11. Créer un job 3 et coupler le script Jenkinsfile au job 3</h1>
+<img src="assets/19-script-path.png" alt=""> <br>
+<img src="assets/20-config-jenkins-etape1.png" alt=""> <br>
+<img src="assets/20-config-jenkins-etape2.png" alt=""> <br>
