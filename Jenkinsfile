@@ -47,7 +47,7 @@ pipeline {
                 script {
                     echo "Deploying Docker image..."
                     // Commande pour lancer le conteneur Docker sur Windows
-                    bat "docker run -d --name app-${BUILD_NUMBER} ${registry}:${BUILD_NUMBER}"
+                    bat "docker run -d -p 8080:80 --name app-${BUILD_NUMBER} ${registry}:${BUILD_NUMBER}"
                 }
             }
         }
