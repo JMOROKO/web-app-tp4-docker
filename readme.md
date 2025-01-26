@@ -158,6 +158,8 @@ pipeline {
 <img src="assets/19-script-path.png" alt=""> <br>
 <img src="assets/20-config-jenkins-etape1.png" alt=""> <br>
 <img src="assets/20-config-jenkins-etape2.png" alt=""> <br>
+<p><b>Lancer le build</b></p>
+<img src="assets/111-lancer-build.png" alt="">
 <h1>12. Resultat de la mise en place du pipeline</h1>
 <img src="assets/22-mise-en-place-pipeline.png" alt="">
 <h2>13. Resultat du déploiement dans docker desktop</h2>
