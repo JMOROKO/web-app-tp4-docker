@@ -38,3 +38,18 @@ Il faut utiliser le même compte que vous compter utiliser dans docker hub
 <img src="assets/11-sortie-console.png" alt="">
 <p>Aller jusqu'en bas du fichier pour voir le message d'erreur</p>
 <img src="assets/11-erreur.png" alt="">
+<h1>7. Mise à jour du projet github</h1>
+<p>Un push dans github enclanche automatiquement un build dans jenkins</p>
+<img src="assets/12-build-automatique-jenkins.png" alt=""> <br>
+<img src="assets/12-docker-hub.png" alt="">
+<h1>8. Supprimer le job dans jenkins</h1>
+<img src="assets/13-supprimer.png" alt="">
+<br><br><br>
+<h1>9. Partie 2 CI/CD => Intégration continue / Déploiement continue</h1>
+<p>Il faut reprendre toutes les étapes précédente et ajouter un script shell</p>
+<img src="assets/14-build-shell.png" alt=""> <br>
+<img src="assets/15-commande-shell.png" alt="">
+<p><b>Lancement automatique du job</b></p>
+<img src="assets/16-lancement-auto-job.png" alt=""> <br>
+<img src="assets/17-docker-image.png" alt=""> <br>
+
