@@ -157,10 +157,12 @@ pipeline {
 <h1>11. Créer un job 3 et coupler le script Jenkinsfile au job 3</h1>
 <img src="assets/19-script-path.png" alt=""> <br>
 <img src="assets/20-config-jenkins-etape1.png" alt=""> <br>
-<img src="assets/20-config-jenkins-etape2.png" alt=""> <br>
+<!--<img src="assets/20-config-jenkins-etape2.png" alt=""> <br>-->
 <p><b>Lancer le build</b></p>
 <img src="assets/111-lancer-build.png" alt="">
 <h1>12. Resultat de la mise en place du pipeline</h1>
+<p><b>Installation du plugins view stage</b></p>
+<img src="assets/21-install-pipeline-stage-view-plugins.png" alt="">
 <img src="assets/22-mise-en-place-pipeline.png" alt="">
 <h2>13. Resultat du déploiement dans docker desktop</h2>
 <img src="assets/22-mise-en-place-docker.png" alt=""> 
